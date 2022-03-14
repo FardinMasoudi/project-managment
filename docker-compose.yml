@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+    app:
+        image: chialab/php:7.4-fpm
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+        privileged: true
+        pid: host
+        networks:
+            - snappPay
+        restart: always
+
+    webserver:
+        image: nginx:alpine
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        ports:
+            - 88:80
+        networks:
+            - snappPay
+        restart: always
+
+    mysql:
+        image: mysql:latest
+        volumes:
+            - "./.mysql-data/db:/var/lib/mysql"
+        restart: always
+        networks:
+            - snappPay
+        environment:
+            MYSQL_ROOT_PASSWORD: snappPay
+            MYSQL_DATABASE: project-management
+            MYSQL_USER: snappPay_user
+            MYSQL_PASSWORD: snappPay_password
+
+networks:
+    snappPay:
+        driver: bridge
