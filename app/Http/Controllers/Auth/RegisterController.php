@@ -19,8 +19,12 @@ class RegisterController extends ApiController
 
     public function __invoke(RegisterRequest $request): JsonResponse
     {
-        $this->userRepository->createUser($request);
+        $user = $this->userRepository->createUser($request);
 
-        return $this->responseOk();
+        $user = $this->userRepository->getUserByEmail($request->email);
+
+        return $this->responseOk([
+            'access_token' => $user->createToken('auth_token')->plainTextToken
+        ]);
     }
 }
