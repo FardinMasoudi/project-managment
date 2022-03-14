@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\LoginRequest;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
