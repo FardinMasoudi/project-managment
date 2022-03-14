@@ -19,6 +19,11 @@ class UserRepository implements UserRepositoryInterface
         return User::query()->findOrFail($id);
     }
 
+    public function getUserByEmail($email)
+    {
+        return User::query()->whereEmail($email)->first();
+    }
+
     public function createUser(Request $request)
     {
         return User::query()->create([
