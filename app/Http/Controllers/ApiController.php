@@ -42,7 +42,7 @@ class ApiController extends Controller
     public function responseError($error = null, $code = 400): \Illuminate\Http\JsonResponse
     {
         return $this->setHasError(true)
-            ->serResponseCode(Response::HTTP_BAD_REQUEST)
+            ->setResponseCode(Response::HTTP_BAD_REQUEST)
             ->response($error, $code);
     }
 }
