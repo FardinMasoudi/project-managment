@@ -19,6 +19,32 @@ class ProjectTest extends TestCase
         $this->signIn();
     }
 
+    public function test_title_filed_is_required()
+    {
+        $this->postJson(route('projects.store'), [
+            'description' => 'project description'
+        ])->assertJsonStructure(['errors' => [
+            'title' => [
+                [
+
+                ]
+            ]
+        ]]);
+    }
+
+    public function test_description_filed_is_required()
+    {
+        $this->postJson(route('projects.store'), [
+            'title' => 'title'
+        ])->assertJsonStructure(['errors' => [
+            'description' => [
+                [
+
+                ]
+            ]
+        ]]);
+    }
+
     public function test_the_user_can_see_list_of_own_projects()
     {
         $this->create(Project::class, [
@@ -39,12 +65,14 @@ class ProjectTest extends TestCase
             ]]);
     }
 
-    public function test_the_loggedin_user_caan_see_details_of_project()
+    public function test_the_loggedin_user_caan_see_details_of_own_project()
     {
         $project = $this->create(Project::class, [
-            'title' => 'test'
+            'title' => 'test',
+            'creator_id' => auth()->user()->id
         ]);
-        $this->postJson(route('projects.show', [$project]))
+
+        $this->getJson(route('projects.show', [$project]))
             ->assertJson(['code' => 200])
             ->assertJsonStructure(['data' => [
                 'id',
@@ -67,13 +95,14 @@ class ProjectTest extends TestCase
         ]);
     }
 
-    public function test_the_loggedin_user_can_update_projects()
+    public function test_the_loggedin_user_can_update_own_projects()
     {
         $project = $this->create(Project::class, [
-            'title' => 'test'
+            'title' => 'test',
+            'creator_id' => auth()->user()->id
         ]);
 
-        $this->postJson(route('projects.update', [$project]), [
+        $this->patchJson(route('projects.update', [$project]), [
             'title' => 'project-management',
             'description' => 'description of projects'
         ])->assertJson(['code' => 200]);
