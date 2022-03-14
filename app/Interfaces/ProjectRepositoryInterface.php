@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 interface ProjectRepositoryInterface
 {
-    public function getAllProjects();
+    public function getAllProject();
 
     public function getOwnProjects();
 
