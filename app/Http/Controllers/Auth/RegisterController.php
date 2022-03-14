@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\RegisterRequest;
 use App\Interfaces\UserRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
-    private UserRepositoryInterface $repository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __invoke(UserRepositoryInterface $repository)
+    public function __construct(UserRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->userRepository = $repository;
     }
 
-    public function store(RegisterRequest $request)
+    public function __invoke(RegisterRequest $request): JsonResponse
     {
-        $this->repository->createUser($request);
+        $this->userRepository->createUser($request);
+
+        return $this->responseOk();
     }
 }
