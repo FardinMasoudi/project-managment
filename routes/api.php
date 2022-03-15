@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Client\InviteUserController;
 use App\Http\Controllers\Client\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/{project}', [ProjectController::class, 'update'])
             ->name('projects.update');
     });
+
+    Route::post('/invite-member', InviteUserController::class)
+        ->name('client-invite-user');
 
 
 });

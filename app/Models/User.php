@@ -47,4 +47,15 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_member', 'member_id');
+    }
+
+    public function currentProject()
+    {
+        return $this->projects()->where('is_active', true)->first();
+    }
 }
