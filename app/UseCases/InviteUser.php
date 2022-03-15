@@ -48,7 +48,7 @@ class InviteUser
 
     public function sendEmailToUser()
     {
-        return $this;
+        \event(new \App\Events\Invite($this->user));
     }
 
     public function addUser()
