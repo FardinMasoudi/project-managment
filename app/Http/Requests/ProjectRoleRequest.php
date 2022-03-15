@@ -24,7 +24,9 @@ class ProjectRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required']
+            'title' => ['required'],
+            'permissions' => ['required', 'array'],
+            'permissions.*' => ['required', 'exists:permissions,id']
         ];
     }
 }

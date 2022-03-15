@@ -40,12 +40,20 @@ class ProjectRoleTest extends TestCase
     public function test_client_can_store_new_role_for_project()
     {
         $this->postJson(route('client-project-roles.store'), [
-            'title' => 'project-manager'
+            'title' => 'project-manager',
+            'permissions' => [
+                '1',
+                '2'
+            ]
         ])
             ->assertJson(['code' => 200]);
 
         $this->assertDatabaseHas('project_roles', [
             'title' => 'project-manager'
+        ]);
+        $this->assertDatabaseHas('project_role_permission', [
+            'role_id' => ProjectRole::where('title', 'project-manager')->first()->id,
+            'permission_id' => 1
         ]);
     }
 
@@ -56,12 +64,20 @@ class ProjectRoleTest extends TestCase
         ]);
 
         $this->patchJson(route('client-project-roles.update', [$projectRole->id]), [
-            'title' => 'reporter'
+            'title' => 'reporter',
+            'permissions' => [
+                '1',
+                '2'
+            ]
         ])
             ->assertJson(['code' => 200]);
 
         $this->assertDatabaseMissing('project_roles', [
             'title' => 'admin'
+        ]);
+        $this->assertDatabaseHas('project_role_permission', [
+            'role_id' => ProjectRole::where('title', 'reporter')->first()->id,
+            'permission_id' => 1
         ]);
     }
 
@@ -75,7 +91,7 @@ class ProjectRoleTest extends TestCase
             ->assertJson(['code' => 200]);
 
         $this->assertDatabaseMissing('project_roles', [
-            'id' => $projectRole->id
+            'id' => $projectRole->id,
         ]);
     }
 }
