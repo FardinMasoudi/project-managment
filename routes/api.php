@@ -53,5 +53,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ProjectRoleController::class, 'store'])
             ->name('client-project-roles.store');
 
+        Route::patch('/{projectRole}', [ProjectRoleController::class, 'update'])
+            ->name('client-project-roles.update');
+
+        Route::delete('/{projectRole}', [ProjectRoleController::class, 'destroy'])
+            ->name('client-project-roles.delete');
     });
 });

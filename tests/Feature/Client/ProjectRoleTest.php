@@ -20,7 +20,7 @@ class ProjectRoleTest extends TestCase
         $this->signIn();
         $this->prepareData();
     }
-
+    
     public function test_owner_project_can_see_list_of_project_roles()
     {
         $this->create(ProjectRole::class, [
@@ -44,10 +44,38 @@ class ProjectRoleTest extends TestCase
         ])
             ->assertJson(['code' => 200]);
 
-        $this->assertDatabaseHas('project_roles',[
-            'title'=> 'project-manager'
+        $this->assertDatabaseHas('project_roles', [
+            'title' => 'project-manager'
         ]);
     }
 
+    public function test_client_can_update_project_role()
+    {
+        $projectRole = $this->create(ProjectRole::class, [
+            'title' => 'admin'
+        ]);
 
+        $this->patchJson(route('client-project-roles.update', [$projectRole->id]), [
+            'title' => 'reporter'
+        ])
+            ->assertJson(['code' => 200]);
+
+        $this->assertDatabaseMissing('project_roles', [
+            'title' => 'admin'
+        ]);
+    }
+
+    public function test_client_can_delete_project_role()
+    {
+        $projectRole = $this->create(ProjectRole::class, [
+            'title' => 'admin'
+        ]);
+
+        $this->deleteJson(route('client-project-roles.delete', [$projectRole]))
+            ->assertJson(['code' => 200]);
+
+        $this->assertDatabaseMissing('project_roles', [
+            'id' => $projectRole->id
+        ]);
+    }
 }
