@@ -2,12 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\ProjectRequest;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Models\Project;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
