@@ -14,7 +14,7 @@ interface ProjectRepositoryInterface
 
     public function getProjectById($id);
 
-    public function createProject(ProjectRequest $request);
+    public function createProject(Request $request);
 
-    public function updateProject(Project $project, ProjectRequest $request);
+    public function updateProject($projectId, Request $request);
 }

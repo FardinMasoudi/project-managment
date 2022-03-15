@@ -11,26 +11,33 @@ use Illuminate\Http\Request;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
+    protected $project;
+
+    public function __construct(Project $project)
+    {
+        $this->project = $project;
+    }
+
     public function getAllProject()
     {
-        return Project::all();
+        return $this->project->all();
     }
 
     public function getOwnProjects()
     {
-        return Project::with('creator')
+        return $this->project->with('creator')
             ->where('creator_id', auth()->user()->id)
             ->get();
     }
 
     public function getProjectById($id)
     {
-        return Project::query()->findOrFail($id);
+        return $this->project->query()->findOrFail($id);
     }
 
-    public function createProject(ProjectRequest $request)
+    public function createProject($request)
     {
-        return Project::query()->create([
+        return $this->project->create([
             'creator_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description,
@@ -38,11 +45,12 @@ class ProjectRepository implements ProjectRepositoryInterface
         ]);
     }
 
-    public function updateProject(Project $project, ProjectRequest $request)
+    public function updateProject($projectId, $request)
     {
-        return $project->update([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        return $this->project->where('id', $projectId)->first()
+            ->update([
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
     }
 }
