@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Client\InviteUserController;
+use App\Http\Controllers\Client\PermissionController;
 use App\Http\Controllers\Client\ProjectController;
 use App\Http\Controllers\Client\ProjectRoleController;
 use Illuminate\Http\Request;
@@ -59,4 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{projectRole}', [ProjectRoleController::class, 'destroy'])
             ->name('client-project-roles.delete');
     });
+
+    Route::post('/permissions', PermissionController::class)
+        ->name('client-permissions');
 });

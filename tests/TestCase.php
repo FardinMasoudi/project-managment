@@ -25,6 +25,8 @@ abstract class TestCase extends BaseTestCase
 
     public function prepareData()
     {
+        $this->artisan('db:seed');
+
         $project1 = $this->create(Project::class, []);
         $project2 = $this->create(Project::class, []);
 
