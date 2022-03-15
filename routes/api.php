@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Client\InviteUserController;
 use App\Http\Controllers\Client\ProjectController;
+use App\Http\Controllers\Client\ProjectRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/invite-member', InviteUserController::class)
         ->name('client-invite-user');
 
-
+    Route::prefix('/project-roles')->group(function () {
+        Route::get('/', [ProjectRoleController::class, 'index'])
+            ->name('client-project-roles.index');
+   });
 });

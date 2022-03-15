@@ -25,7 +25,7 @@ class InviteUser
             ->sendEmailToUser();
     }
 
-    public function findOrCreateUser()
+    public function findOrCreateUser(): InviteUser
     {
         $this->user = $this->userRepository->getUserByEmail($this->request->email);
 
@@ -35,7 +35,7 @@ class InviteUser
         return $this;
     }
 
-    public function addUserToProject()
+    public function addUserToProject(): InviteUser
     {
         DB::table('project_member')->insert([
             'project_id' => auth()->user()->currentProject()->id,
