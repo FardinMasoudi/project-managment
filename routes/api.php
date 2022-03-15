@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\InviteUserController;
 use App\Http\Controllers\Client\PermissionController;
 use App\Http\Controllers\Client\ProjectController;
 use App\Http\Controllers\Client\ProjectRoleController;
+use App\Http\Controllers\Client\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,4 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/permissions', PermissionController::class)
         ->name('client-permissions');
+
+    Route::patch('users/{user}/attach-roles', [UserRoleController::class, 'update'])
+        ->name('client-user-attach-role');
 });

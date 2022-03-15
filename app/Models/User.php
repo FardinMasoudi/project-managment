@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Couchbase\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_member', 'member_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(ProjectRole::class, 'user_project_role', 'role_id');
     }
 
     public function currentProject()
