@@ -46,7 +46,12 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('client-invite-user');
 
     Route::prefix('/project-roles')->group(function () {
+
         Route::get('/', [ProjectRoleController::class, 'index'])
             ->name('client-project-roles.index');
-   });
+
+        Route::post('/', [ProjectRoleController::class, 'store'])
+            ->name('client-project-roles.store');
+
+    });
 });

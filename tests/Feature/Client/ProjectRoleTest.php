@@ -36,5 +36,18 @@ class ProjectRoleTest extends TestCase
                 ]
             ]]);
     }
-    
+
+    public function test_client_can_store_new_role_for_project()
+    {
+        $this->postJson(route('client-project-roles.store'), [
+            'title' => 'project-manager'
+        ])
+            ->assertJson(['code' => 200]);
+
+        $this->assertDatabaseHas('project_roles',[
+            'title'=> 'project-manager'
+        ]);
+    }
+
+
 }
