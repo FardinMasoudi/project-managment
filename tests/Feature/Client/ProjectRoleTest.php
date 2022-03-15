@@ -20,7 +20,7 @@ class ProjectRoleTest extends TestCase
         $this->signIn();
         $this->prepareData();
     }
-    
+
     public function test_owner_project_can_see_list_of_project_roles()
     {
         $this->create(ProjectRole::class, [
