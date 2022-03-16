@@ -1,0 +1,30 @@
+[
+    {
+        "title": "active",
+        "label": "فعال"
+    },
+    {
+        "title": "inactive",
+        "label": "غیرفعال"
+    },
+    {
+        "title": "todo",
+        "label": "todo"
+    },
+    {
+        "title": "doing",
+        "label": "doing"
+    },
+    {
+        "title": "done",
+        "label": "done"
+    },
+    {
+        "title": "rejected",
+        "label": "rejected"
+    },
+    {
+        "title": "accepted",
+        "label": "accepted"
+    }
+]
