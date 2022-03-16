@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\PermissionController;
 use App\Http\Controllers\Client\ProjectController;
 use App\Http\Controllers\Client\ProjectRoleController;
 use App\Http\Controllers\Client\SprintController;
+use App\Http\Controllers\Client\TaskController;
 use App\Http\Controllers\Client\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,4 +84,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/{id}', [SprintController::class, 'update'])
             ->name('client-sprints-update');
     });
+
+    Route::prefix('/tasks')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])
+            ->name('client-tasks-index');
+    });
+
 });
