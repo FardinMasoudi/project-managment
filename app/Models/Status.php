@@ -10,4 +10,9 @@ class Status extends Model
     use HasFactory;
 
     protected $guarded = [''];
+
+    public static function getStatusIdByTitle($title)
+    {
+        return self::where('title', $title)->firstOrFail()->id;
+    }
 }
