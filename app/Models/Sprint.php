@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Sprint extends Model
 {
     use HasFactory;
+
+    protected $guarded = [''];
+
+
+    public function scopeCurrentProject($query)
+    {
+        return $query->where('project_id', auth()->user()->currentProject()->id);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }
