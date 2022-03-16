@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\InviteUserController;
 use App\Http\Controllers\Client\PermissionController;
 use App\Http\Controllers\Client\ProjectController;
 use App\Http\Controllers\Client\ProjectRoleController;
+use App\Http\Controllers\Client\SprintController;
 use App\Http\Controllers\Client\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -67,4 +68,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::patch('users/{user}/attach-roles', [UserRoleController::class, 'update'])
         ->name('client-user-attach-role');
+
+
+    Route::prefix('/sprints')->group(function () {
+        Route::get('/', [SprintController::class, 'index'])
+            ->name('client-sprints-index');
+
+        Route::get('/{id}', [SprintController::class, 'show'])
+            ->name('client-sprints-show');
+
+        Route::post('/', [SprintController::class, 'store'])
+            ->name('client-sprints-store');
+
+        Route::patch('/{id}', [SprintController::class, 'update'])
+            ->name('client-sprints-update');
+    });
 });
