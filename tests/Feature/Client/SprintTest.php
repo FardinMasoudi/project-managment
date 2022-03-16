@@ -3,6 +3,7 @@
 namespace Tests\Feature\Client;
 
 use App\Models\Sprint;
+use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -29,6 +30,73 @@ class SprintTest extends TestCase
 
         $this->getJson(route('client-sprints-index'))
             ->assertJson(['code' => 200])
+            ->assertJsonStructure(['data' => [
+                [
+                    'id',
+                    'goal',
+                    'start_time',
+                    'end_time',
+                    'status',
+                ]
+            ]]);
+
+    }
+
+    public function test_a_client_can_filter_sprints_by_goal()
+    {
+        $this->create(Sprint::class, [
+            'project_id' => auth()->user()->currentProject()->id,
+            'goal' => 'goal1'
+        ]);
+        $this->create(Sprint::class, [
+            'project_id' => auth()->user()->currentProject()->id,
+            'goal' => 'goal2'
+        ]);
+
+        $this->getJson(route('client-sprints-index') . "?goal=goal1")
+            ->assertJson(['code' => 200,
+                'data' => [
+                    [
+                        'goal' => 'goal1'
+                    ]
+                ]])
+            ->assertJsonMissing(['data' => [
+                [
+                    'goal' => 'goal2'
+                ]
+            ]])
+            ->assertJsonStructure(['data' => [
+                [
+                    'id',
+                    'goal',
+                    'start_time',
+                    'end_time',
+                    'status',
+                ]
+            ]]);
+
+    }
+
+    public function test_a_client_can_filter_sprints_by_status()
+    {
+        $this->create(Sprint::class, [
+            'project_id' => auth()->user()->currentProject()->id,
+            'status_id' => Status::getStatusIdByTitle('active'),
+            'goal' => 'goal1'
+        ]);
+        $this->create(Sprint::class, [
+            'project_id' => auth()->user()->currentProject()->id,
+            'status_id' => Status::getStatusIdByTitle('inactive'),
+            'goal' => 'goal2',
+
+        ]);
+
+        $this->getJson(route('client-sprints-index') . "?status=active")
+            ->assertJson(['code' => 200, 'data' => [
+                [
+                    'status' => 'active'
+                ]
+            ]])
             ->assertJsonStructure(['data' => [
                 [
                     'id',

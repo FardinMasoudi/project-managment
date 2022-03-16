@@ -17,9 +17,10 @@ class SprintRepository implements SprintRepositoryInterface
     }
 
 
-    public function getAll()
+    public function getAll($filter)
     {
         return $this->sprintRepository->with('status')
+            ->filter($filter)
             ->currentProject()
             ->get();
     }

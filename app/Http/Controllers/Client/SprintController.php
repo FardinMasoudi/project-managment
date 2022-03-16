@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Filters\SprintFilter;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SprintRequest;
 use App\Http\Resources\SprintResource;
 use App\Interfaces\SprintRepositoryInterface;
-use App\Models\Sprint;
-use App\Models\Status;
+use App\Traits\Filter;
+
 
 class SprintController extends ApiController
 {
@@ -18,9 +19,9 @@ class SprintController extends ApiController
         $this->sprintRepository = $repository;
     }
 
-    public function index()
+    public function index(SprintFilter $filter)
     {
-        $sprints = $this->sprintRepository->getAll();
+        $sprints = $this->sprintRepository->getAll($filter);
 
         return $this->responseOk(SprintResource::collection($sprints));
     }

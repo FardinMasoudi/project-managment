@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface SprintRepositoryInterface
 {
-    public function getAll();
+    public function getAll($filter);
 
     public function getById($id);
 

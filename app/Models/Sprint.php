@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sprint extends Model
 {
     use HasFactory;
+    use FilterTrait;
 
     protected $guarded = [''];
 
