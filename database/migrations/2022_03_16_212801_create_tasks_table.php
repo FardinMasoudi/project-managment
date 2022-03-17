@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('sprint_id')->constrained('sprints')->cascadeOnDelete();
             $table->foreignId('reporter_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('assign_to')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('assign_to')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('type', ['task', 'bug', 'story']);

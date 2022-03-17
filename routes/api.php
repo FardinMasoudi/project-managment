@@ -88,6 +88,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/tasks')->group(function () {
         Route::get('/', [TaskController::class, 'index'])
             ->name('client-tasks-index');
-    });
 
+        Route::get('/{id}', [TaskController::class, 'show'])
+            ->name('client-tasks-show');
+
+        Route::post('/', [TaskController::class, 'store'])
+            ->name('client-tasks-store');
+
+        Route::patch('/{id}', [TaskController::class, 'update'])
+            ->name('client-tasks-update');
+
+        Route::delete('/{id}', [TaskController::class, 'delete'])
+            ->name('client-tasks-delete');
+    });
 });
