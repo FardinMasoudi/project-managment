@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface TaskReositoryInterface
 {
-    public function getAll();
+    public function getAll($filters);
 
     public function getById($id);
 

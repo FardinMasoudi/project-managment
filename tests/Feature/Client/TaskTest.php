@@ -3,6 +3,7 @@
 namespace Tests\Feature\Client;
 
 use App\Models\Sprint;
+use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
@@ -40,6 +41,52 @@ class TaskTest extends TestCase
                     'title',
                     'status',
                     'deadline_time',
+                ]
+            ]]);
+    }
+
+    public function test_client_filter_tasks_by_status()
+    {
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('todo')
+        ], 2);
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('doing')
+        ]);
+
+        $this->getJson(route('client-tasks-index') . "?status=todo")
+            ->assertJson(['code' => 200, 'data' => [
+                [
+                    'status' => 'todo'
+                ]]])
+            ->assertJsonMissing(['data' => [
+                [
+                    'status' => 'doing'
+                ]
+            ]]);
+    }
+
+    public function test_client_filter_only_issues()
+    {
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('todo'),
+            'assign_to' => auth()->user()->id
+        ], 2);
+
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('doing'),
+            'assign_to' => $this->create(User::class)->id
+        ]);
+
+        $this->getJson(route('client-tasks-index') . "?status=todo&onlyMyIssues")
+            ->assertJson(['code' => 200, 'data' => [
+                [
+                    'status' => 'todo',
+                    'assign_to' => auth()->user()->name
+                ]]])
+            ->assertJsonMissing(['data' => [
+                [
+                    'status' => 'doing'
                 ]
             ]]);
     }

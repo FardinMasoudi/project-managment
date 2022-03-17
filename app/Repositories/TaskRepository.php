@@ -15,7 +15,7 @@ class TaskRepository implements TaskReositoryInterface
         $this->task = $task;
     }
 
-    public function getAll()
+    public function getAll($filters)
     {
         return $this->task->with('status', 'reporter', 'assignTo')
             ->get();
