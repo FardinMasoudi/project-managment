@@ -11,11 +11,9 @@ class UserRoleController extends ApiController
 {
     public function update(User $user, UserRoleRequest $request)
     {
-        DB::table('user_project_role')->insert([
-            'member_id' => $user->id,
-            'role_id' => $request->role_id,
-            'project_id' => auth()->user()->currentProject()->id
-        ]);
+       $user->roles()->attach([
+           'role_id' => $request->role_id
+       ]);
 
         return $this->responseOk();
     }

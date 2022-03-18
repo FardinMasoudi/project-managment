@@ -34,7 +34,7 @@ class UserRoleTest extends TestCase
         ])
             ->assertJson(['code' => 200]);
 
-        $this->assertDatabaseHas('user_project_role', [
+        $this->assertDatabaseHas('user_role', [
             'role_id' => $role->id,
             'member_id' => $user->id
         ]);
