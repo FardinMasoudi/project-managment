@@ -8,16 +8,16 @@ use App\Interfaces\PermissionRepositoryInterface;
 
 class PermissionController extends ApiController
 {
-    public $permission;
+    public $permissionRepository;
 
     public function __construct(PermissionRepositoryInterface $permissionRepository)
     {
-        $this->permission = $permissionRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
     public function __invoke()
     {
-        $permissions = $this->permission->getAllPermission();
+        $permissions = $this->permissionRepository->getAllPermission();
 
         return $this->responseOk(PermissionResource::collection($permissions));
     }

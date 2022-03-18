@@ -11,7 +11,7 @@ use App\Models\Project;
 
 class ProjectController extends ApiController
 {
-    private ProjectRepositoryInterface $projectRepository;
+    private  $projectRepository;
 
     public function __construct(ProjectRepositoryInterface $repository)
     {
