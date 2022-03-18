@@ -42,10 +42,10 @@ class ProjectController extends ApiController
         return $this->responseOk();
     }
 
-    public function update(Project $project, ProjectRequest $request)
+    public function update($id, ProjectRequest $request)
     {
         $this->projectRepository
-            ->updateProject($project->id, $request);
+            ->updateProject($id, $request);
 
         return $this->responseOk();
     }
