@@ -2,14 +2,16 @@
 
 namespace Tests\Feature\Command;
 
+use App\Jobs\SendExpiredTaskEmailJobToUser;
 use App\Mail\ExpiredTaskEmail;
-use App\Mail\WelcomeInvitationMail;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Queue;
+
 
 class TaskExpireTest extends TestCase
 {
@@ -25,7 +27,7 @@ class TaskExpireTest extends TestCase
 
     public function test_check_doing_tasks_is_expired()
     {
-        Mail::fake();
+        Queue::fake();
 
         $this->create(Task::class, [
             'deadline_time' => Carbon::now()->subDay()
@@ -36,7 +38,6 @@ class TaskExpireTest extends TestCase
 
         $this->artisan('task:expired');
 
-
-        Mail::assertSent(ExpiredTaskEmail::class);
+        Queue::assertPushed(SendExpiredTaskEmailJobToUser::class);
     }
 }
