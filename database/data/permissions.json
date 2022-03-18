@@ -1,7 +1,7 @@
 [
     {
         "title": "create-role",
-        "label": "ایجاد نقش"
+        "label": "create-role"
     },
     {
         "title": "update-project",
@@ -9,7 +9,7 @@
     },
     {
         "title": "view-role",
-        "label": "مشاهده نقش"
+        "label": "view-role"
     },
     {
         "title": "create-task",
@@ -17,19 +17,15 @@
     },
     {
         "title": "update-task",
-        "label": "ایجاد تسک"
+        "label": "update-task"
     },
     {
         "title": "remove-task",
-        "label": "حذف تسک"
+        "label": "remove-task"
     },
     {
         "title": "invite-user",
-        "label": "دعوت کاربر"
-    },
-    {
-        "title": "give-access",
-        "label": "دسترسی دادن"
+        "label": "invite-user"
     },
     {
         "title": "view-sprint",
@@ -62,5 +58,9 @@
     {
         "title": "remove-role",
         "label": "remove-role"
+    },
+    {
+        "title": "attach-role",
+        "label": "attach-role"
     }
 ]
