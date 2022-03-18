@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
-    private UserRepositoryInterface $userRepository;
+    private $userRepository;
 
     public function __construct(UserRepositoryInterface $repository)
     {

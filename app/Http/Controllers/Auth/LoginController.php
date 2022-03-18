@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends ApiController
 {
-    private UserRepositoryInterface $userRepository;
+    private $userRepository;
 
     public function __construct(UserRepositoryInterface $repository)
     {
