@@ -19,25 +19,12 @@ class InviteUserTest extends TestCase
         parent::setUp();
 
         $this->signIn();
+        $this->prepareData();
     }
 
     public function test_the_owner_project_can_invite_members_by_email()
     {
-        $project1 = $this->create(Project::class);
-        $project2 = $this->create(Project::class);
-
-        DB::table('project_member')
-            ->insert([
-                [
-                    'project_id' => $project1->id,
-                    'member_id' => auth()->user()->id,
-                    'is_active' => true
-                ], [
-                    'project_id' => $project2->id,
-                    'member_id' => auth()->user()->id,
-                    'is_active' => false
-                ]
-            ]);
+        $this->GivenAccessToUser('invite-user');
 
         $this->postJson(route('client-invite-user', [
             'email' => 'abc@gmail.com',
@@ -46,7 +33,7 @@ class InviteUserTest extends TestCase
             ->assertJson(['code' => 200]);
 
         $this->assertDatabaseHas('project_member', [
-            'project_id' => $project1->id,
+            'project_id' => auth()->user()->currentProject()->id,
             'member_id' => User::where('email', 'abc@gmail.com')->first()->id
         ]);
     }

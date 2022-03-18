@@ -49,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/invite-member', InviteUserController::class)
+        ->middleware('hasPermission:invite-user')
         ->name('client-invite-user');
 
     Route::prefix('/project-roles')->group(function () {
