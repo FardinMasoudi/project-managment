@@ -1,11 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Client;
 
 use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use function auth;
+use function route;
 
 class ProjectTest extends TestCase
 {

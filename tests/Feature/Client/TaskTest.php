@@ -109,7 +109,7 @@ class TaskTest extends TestCase
             ]]);
     }
 
-    public function test_client_can_make_new_test()
+    public function test_client_can_make_new_task()
     {
         $this->GivenAccessToUser('create-task');
 
