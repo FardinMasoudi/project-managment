@@ -10,21 +10,10 @@ use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
-    private $userRepository;
-
-    public function __construct(UserRepositoryInterface $repository)
+    public function __invoke(RegisterRequest $request, UserRepositoryInterface $userRepository): JsonResponse
     {
-        $this->userRepository = $repository;
-    }
+        $userRepository->createUser($request);
 
-    public function __invoke(RegisterRequest $request): JsonResponse
-    {
-        $user = $this->userRepository->createUser($request);
-
-        $user = $this->userRepository->getUserByEmail($request->email);
-
-        return $this->responseOk([
-            'access_token' => $user->createToken('auth_token')->plainTextToken
-        ]);
+        return $this->responseOk();
     }
 }
