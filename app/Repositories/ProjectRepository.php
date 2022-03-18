@@ -6,7 +6,7 @@ use App\Interfaces\ProjectRepositoryInterface;
 use App\Models\Project;
 use Carbon\Carbon;
 
-class ProjectRepository implements ProjectRepositoryInterface
+class   ProjectRepository implements ProjectRepositoryInterface
 {
     protected $project;
 

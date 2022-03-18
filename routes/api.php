@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\ProjectRoleController;
 use App\Http\Controllers\Client\SprintController;
 use App\Http\Controllers\Client\TaskController;
 use App\Http\Controllers\Client\UserRoleController;
+use App\Models\Sprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ProjectController::class, 'store'])
             ->name('projects.store');
 
-        Route::patch('/{project}', [ProjectController::class, 'update'])
+        Route::patch('/{id}', [ProjectController::class, 'update'])
+            ->middleware('hasPermission:update-project')
             ->name('projects.update');
     });
 
@@ -52,15 +54,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/project-roles')->group(function () {
 
         Route::get('/', [ProjectRoleController::class, 'index'])
+            ->middleware('hasPermission:view-role')
             ->name('client-project-roles.index');
 
         Route::post('/', [ProjectRoleController::class, 'store'])
+            ->middleware('hasPermission:create-role')
             ->name('client-project-roles.store');
 
         Route::patch('/{projectRole}', [ProjectRoleController::class, 'update'])
+            ->middleware('hasPermission:update-role')
             ->name('client-project-roles.update');
 
         Route::delete('/{projectRole}', [ProjectRoleController::class, 'destroy'])
+            ->middleware('hasPermission:remove-role')
             ->name('client-project-roles.delete');
     });
 
@@ -73,15 +79,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/sprints')->group(function () {
         Route::get('/', [SprintController::class, 'index'])
+            ->middleware('hasPermission:view-sprint')
             ->name('client-sprints-index');
 
         Route::get('/{id}', [SprintController::class, 'show'])
+            ->middleware('hasPermission:show-sprint')
             ->name('client-sprints-show');
 
         Route::post('/', [SprintController::class, 'store'])
+            ->middleware('hasPermission:create-sprint')
             ->name('client-sprints-store');
 
         Route::patch('/{id}', [SprintController::class, 'update'])
+            ->middleware('hasPermission:update-sprint')
             ->name('client-sprints-update');
     });
 
@@ -93,12 +103,15 @@ Route::middleware('auth:sanctum')->group(function () {
             ->name('client-tasks-show');
 
         Route::post('/', [TaskController::class, 'store'])
+            ->middleware('hasPermission:create-task')
             ->name('client-tasks-store');
 
         Route::patch('/{id}', [TaskController::class, 'update'])
+            ->middleware('hasPermission:update-task')
             ->name('client-tasks-update');
 
         Route::delete('/{id}', [TaskController::class, 'delete'])
+            ->middleware('hasPermission:remove-task')
             ->name('client-tasks-delete');
     });
 });

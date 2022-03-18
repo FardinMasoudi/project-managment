@@ -111,6 +111,8 @@ class TaskTest extends TestCase
 
     public function test_client_can_make_new_test()
     {
+        $this->GivenAccessToUser('create-task');
+
         $user = $this->create(User::class);
         $sprint = $this->create(Sprint::class);
 
@@ -131,6 +133,8 @@ class TaskTest extends TestCase
 
     public function test_the_client_can_update_task()
     {
+        $this->GivenAccessToUser('update-task');
+
         $member1 = $this->create(User::class);
         $member2 = $this->create(User::class);
         $task = $this->create(Task::class, [
@@ -155,6 +159,7 @@ class TaskTest extends TestCase
 
     public function test_the_client_can_remove_task()
     {
+        $this->GivenAccessToUser('remove-task');
         $task = $this->create(Task::class);
 
         $this->deleteJson(route('client-tasks-delete', [$task]))->assertJson(['code' => 200]);

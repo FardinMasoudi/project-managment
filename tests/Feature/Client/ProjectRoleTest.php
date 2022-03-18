@@ -23,6 +23,7 @@ class ProjectRoleTest extends TestCase
 
     public function test_owner_project_can_see_list_of_project_roles()
     {
+        $this->GivenAccessToUser('view-role');
         $this->create(ProjectRole::class, [
             'project_id' => Project::query()->first()->id
         ], 2);
@@ -39,6 +40,7 @@ class ProjectRoleTest extends TestCase
 
     public function test_client_can_store_new_role_for_project()
     {
+        $this->GivenAccessToUser('create-role');
         $this->postJson(route('client-project-roles.store'), [
             'title' => 'project-manager',
             'permissions' => [
@@ -59,6 +61,7 @@ class ProjectRoleTest extends TestCase
 
     public function test_client_can_update_project_role()
     {
+        $this->GivenAccessToUser('update-role');
         $projectRole = $this->create(ProjectRole::class, [
             'title' => 'admin'
         ]);
@@ -83,6 +86,7 @@ class ProjectRoleTest extends TestCase
 
     public function test_client_can_delete_project_role()
     {
+        $this->GivenAccessToUser('remove-role');
         $projectRole = $this->create(ProjectRole::class, [
             'title' => 'admin'
         ]);

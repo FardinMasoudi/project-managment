@@ -46,5 +46,21 @@
     {
         "title": "update-sprint",
         "label": "update-sprint"
+    },
+    {
+        "title": "view-role",
+        "label": "view-role"
+    },
+    {
+        "title": "create-role",
+        "label": "create-role"
+    },
+    {
+        "title": "update-role",
+        "label": "update-role"
+    },
+    {
+        "title": "remove-role",
+        "label": "remove-role"
     }
 ]

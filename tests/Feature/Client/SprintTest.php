@@ -24,6 +24,8 @@ class SprintTest extends TestCase
 
     public function test_cliet_can_see_list_of_sprints()
     {
+        $this->GivenAccessToUser('view-sprint');
+
         $this->create(Sprint::class, [
             'project_id' => auth()->user()->currentProject()->id
         ], 2);
@@ -44,6 +46,8 @@ class SprintTest extends TestCase
 
     public function test_a_client_can_filter_sprints_by_goal()
     {
+        $this->GivenAccessToUser('view-sprint');
+
         $this->create(Sprint::class, [
             'project_id' => auth()->user()->currentProject()->id,
             'goal' => 'goal1'
@@ -79,6 +83,7 @@ class SprintTest extends TestCase
 
     public function test_a_client_can_filter_sprints_by_status()
     {
+        $this->GivenAccessToUser('view-sprint');
         $this->create(Sprint::class, [
             'project_id' => auth()->user()->currentProject()->id,
             'status_id' => Status::getStatusIdByTitle('active'),
@@ -111,6 +116,8 @@ class SprintTest extends TestCase
 
     public function test_client_can_see_details_of_sprint()
     {
+        $this->GivenAccessToUser('show-sprint');
+
         $sprint = $this->create(Sprint::class, [
             'project_id' => auth()->user()->currentProject()->id
         ]);
@@ -128,6 +135,8 @@ class SprintTest extends TestCase
 
     public function test_client_can_create_new_sprint()
     {
+        $this->GivenAccessToUser('create-sprint');
+
         $this->postJson(route('client-sprints-store'), [
             'goal' => 'test',
         ])->assertJson(['code' => 200]);
@@ -139,6 +148,8 @@ class SprintTest extends TestCase
 
     public function test_cluent_can_update_sprint()
     {
+        $this->GivenAccessToUser('update-sprint');
+
         $sprint = $this->create(Sprint::class, [
             'goal' => 'test',
             'end_time' => Carbon::now()->addWeek()
