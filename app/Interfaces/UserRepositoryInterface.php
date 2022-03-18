@@ -13,7 +13,7 @@ interface UserRepositoryInterface
 
     public function getUserByEmail($email);
 
-    public function createUser(Request $request);
+    public function createUser($request);
 
     public function updateUser(User $user, Request $request);
 

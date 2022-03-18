@@ -8,15 +8,21 @@ use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
+    protected $users;
+
+    public function __construct(User $user)
+    {
+        $this->users = $user;
+    }
 
     public function getAllUsers()
     {
-        return User::all();
+        return $this->users->all();
     }
 
     public function getUserById($id)
     {
-        return User::query()->findOrFail($id);
+        return $this->users->findOrFail($id);
     }
 
     public function getUserByEmail($email)
@@ -24,7 +30,7 @@ class UserRepository implements UserRepositoryInterface
         return User::query()->whereEmail($email)->first();
     }
 
-    public function createUser(Request $request)
+    public function createUser($request)
     {
         return User::query()->create([
             'name' => $request->name,
