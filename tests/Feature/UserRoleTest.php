@@ -24,6 +24,7 @@ class UserRoleTest extends TestCase
 
     public function test_admin_can_attch_role_to_user()
     {
+        $this->GivenAccessToUser('attach-role');
         $user = $this->create(User::class);
         $role = $this->create(ProjectRole::class, [
             'title' => 'developer'

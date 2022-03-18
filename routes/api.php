@@ -75,8 +75,8 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('client-permissions');
 
     Route::patch('users/{user}/attach-roles', [UserRoleController::class, 'update'])
+        ->middleware('hasPermission:attach-role')
         ->name('client-user-attach-role');
-
 
     Route::prefix('/sprints')->group(function () {
         Route::get('/', [SprintController::class, 'index'])
