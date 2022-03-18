@@ -1,0 +1,50 @@
+[
+    {
+        "title": "create-role",
+        "label": "ایجاد نقش"
+    },
+    {
+        "title": "update-project",
+        "label": "update-project"
+    },
+    {
+        "title": "view-role",
+        "label": "مشاهده نقش"
+    },
+    {
+        "title": "create-task",
+        "label": "ایجاد تسک"
+    },
+    {
+        "title": "update-task",
+        "label": "ایجاد تسک"
+    },
+    {
+        "title": "remove-task",
+        "label": "حذف تسک"
+    },
+    {
+        "title": "invite-user",
+        "label": "دعوت کاربر"
+    },
+    {
+        "title": "give-access",
+        "label": "دسترسی دادن"
+    },
+    {
+        "title": "view-sprint",
+        "label": "view-sprint"
+    },
+    {
+        "title": "show-sprint",
+        "label": "show-sprint"
+    },
+    {
+        "title": "create-sprint",
+        "label": "create-sprint"
+    },
+    {
+        "title": "update-sprint",
+        "label": "update-sprint"
+    }
+]
