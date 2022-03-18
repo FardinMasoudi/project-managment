@@ -7,24 +7,24 @@ use App\Models\ProjectRole;
 
 class ProjectRoleRepository implements ProjectRoleRepositoryInterface
 {
-    public $projectRole;
+    protected $projectRoles;
     public $currentProjectId;
 
     public function __construct(ProjectRole $projectRole)
     {
-        $this->projectRole = $projectRole;
+        $this->projectRoles = $projectRole;
         $this->currentProjectId = auth()->user()->currentProject()->id;
     }
 
     public function getAllProjectRoles()
     {
-        return $this->projectRole->where('project_id', $this->currentProjectId)
+        return $this->projectRoles->where('project_id', $this->currentProjectId)
             ->get();
     }
 
     public function storeProjectRole($request)
     {
-        return $this->projectRole->create([
+        return $this->projectRoles->create([
             'project_id' => $this->currentProjectId,
             'title' => $request->title
         ]);
@@ -32,7 +32,7 @@ class ProjectRoleRepository implements ProjectRoleRepositoryInterface
 
     public function updateProjectRole($id, $request)
     {
-        return $this->projectRole->where('id', $id)->first()
+        return $this->projectRoles->where('id', $id)->first()
             ->update([
                 'title' => $request->title
             ]);
@@ -40,7 +40,7 @@ class ProjectRoleRepository implements ProjectRoleRepositoryInterface
 
     public function deleteProjectRole($id)
     {
-        return $this->projectRole->where('id', $id)->first()
+        return $this->projectRoles->where('id', $id)->first()
             ->delete();
     }
 }

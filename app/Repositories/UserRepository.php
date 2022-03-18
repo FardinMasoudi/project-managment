@@ -27,28 +27,23 @@ class UserRepository implements UserRepositoryInterface
 
     public function getUserByEmail($email)
     {
-        return User::query()->whereEmail($email)->first();
+        return $this->users->whereEmail($email)->first();
     }
 
     public function createUser($request)
     {
-        return User::query()->create([
+        return $this->users->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password
         ]);
     }
 
-    public function updateUser(User $user, Request $request)
+    public function updateUser($user, $request)
     {
         return $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
-    }
-
-    public function deleteUser()
-    {
-
     }
 }

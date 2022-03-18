@@ -9,17 +9,17 @@ use Carbon\Carbon;
 
 class SprintRepository implements SprintRepositoryInterface
 {
-    protected $sprintRepository;
+    protected $sprints;
 
     public function __construct(Sprint $sprint)
     {
-        $this->sprintRepository = $sprint;
+        $this->sprints = $sprint;
     }
 
 
     public function getAll($filter)
     {
-        return $this->sprintRepository->with('status')
+        return $this->sprints->with('status')
             ->filter($filter)
             ->currentProject()
             ->get();
@@ -27,12 +27,12 @@ class SprintRepository implements SprintRepositoryInterface
 
     public function getById($id)
     {
-        return $this->sprintRepository->where('id', $id)->first();
+        return $this->sprints->where('id', $id)->first();
     }
 
     public function create($request)
     {
-        return $this->sprintRepository->create([
+        return $this->sprints->create([
             'project_id' => auth()->user()->currentProject()->id,
             'goal' => $request->goal,
             'start_time' => Carbon::now(),
@@ -42,7 +42,7 @@ class SprintRepository implements SprintRepositoryInterface
 
     public function update($id, $request)
     {
-        return $this->sprintRepository->where('id', $id)->first()
+        return $this->sprints->where('id', $id)->first()
             ->update([
                 'goal' => $request->goal,
                 'end_time' => $request->end_time
