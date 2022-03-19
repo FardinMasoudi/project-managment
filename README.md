@@ -46,4 +46,16 @@ A few of the techniques you can do see in project-management
 - Using query scopes in Sprint model
 - Using filters on sprint and task controller (SprintFilter.php,TaskFilter.php)
 - Using Observer pattern for make permission (ProjectRoleObserver.php)
-- Dockerize project with docker-compose 
+- Dockerize project with docker-compose
+
+### <a id="build-process"> Build </a>
+
+- git clone https://github.com/FardinMasoudi/project-managment.git
+- install docker and docker compose 
+- exec to container and write commands:
+  - composer install
+  - php artisan migrate
+  - php artisan db:seed
+  - * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1 to cron.tab
+  - php artisan test 
+
