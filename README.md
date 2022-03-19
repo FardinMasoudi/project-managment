@@ -56,6 +56,6 @@ A few of the techniques you can do see in project-management
   - composer install
   - php artisan migrate
   - php artisan db:seed
-  - * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1 to cron.tab
-  - php artisan test 
+  - copy `* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1`  and paste to /etc/cron.tab to run schecdule command
+  - php artisan test
 
