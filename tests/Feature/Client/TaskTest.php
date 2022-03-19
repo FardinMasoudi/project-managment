@@ -98,7 +98,7 @@ class TaskTest extends TestCase
         ]);
 
         $this->getJson(route('client-tasks-show', [$task]))
-            ->assertJson(['code' => 200])
+            ->assertJson(['code' => 200])->dump()
             ->assertJsonStructure(['data' => [
                 'id',
                 'reporter',

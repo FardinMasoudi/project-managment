@@ -460,8 +460,6 @@
 
 #### [- update](#client-sprints.update)
 
-
-
 ### <a id="client-sprints.index"> index </a>
 
 ### description:
@@ -560,7 +558,7 @@
 
 #### parameters:
 
-`goal`  
+`goal`
 
 #### filters:
 
@@ -594,6 +592,7 @@
 
 `goal
 `
+
 #### filters:
 
 `empty`
@@ -612,4 +611,214 @@
 }
 ```
 
+## <a id="client-tasks"> Tasks </a>
 
+#### [- index](#client-tasks.index)
+
+#### [- show](#client-tasks.show)
+
+#### [- store](#client-tasks.store)
+
+#### [- update](#client-tasks.update)
+
+#### [- destroy](#client-tasks.delete)
+
+### <a id="client-tasks.index"> index </a>
+
+### description:
+
+`return list of tasks`
+
+#### method: GET
+
+#### `/api/v1/client/tasks`
+
+#### parameters:
+
+`empty`
+
+#### filters:
+
+`onlyMyIssues`    
+`status`
+
+#### access:
+
+`empty`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "reporter": "Osvaldo Bergnaum",
+            "assign_to": "Carlo Pagac",
+            "title": "Miss",
+            "description": "Vitae aut iste quas officiis dolores. Mollitia consequuntur voluptatem illum blanditiis. Sunt dolorem est officia consequatur est aut odio nobis. In magni corporis reiciendis qui.",
+            "status": "todo",
+            "deadline_time": "2022-03-26 08:31:26"
+        },
+        {
+            "id": 2,
+            "reporter": "Camden Torp",
+            "assign_to": "Lupe Ullrich",
+            "title": "Dr.",
+            "description": "Fugiat consectetur quaerat vero quae. Rerum modi ea maiores maiores ea. Aliquam quo voluptatem sunt qui. Est ut libero explicabo sed labore odio quam. Hic fuga consequatur deserunt.",
+            "status": "todo",
+            "deadline_time": "2022-03-26 08:31:26"
+        }
+    ]
+}
+```
+
+### <a id="client-tasks.show"> show </a>
+
+### description:
+
+`return details of task`
+
+#### method: GET
+
+#### `/api/v1/client/tasks/{id}`
+
+#### parameters:
+
+`empty`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`empty`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": {
+        "id": 1,
+        "reporter": "Mrs. Liana Legros Jr.",
+        "assign_to": "Percival Lind",
+        "title": "Dr.",
+        "description": "Minus consequatur placeat neque dolore delectus dolorem sed. Debitis dolorem sint maiores vero nisi sit. Modi ex doloribus sed ipsam. Quis quo ut deserunt rerum. Quos et ipsum ut aut animi totam.",
+        "status": "todo",
+        "deadline_time": "2022-03-26 08:34:28"
+    }
+}
+```
+
+### <a id="client-tasks.store"> store </a>
+
+### description:
+
+`loggedin user can make new task`
+
+#### method: POST
+
+#### `/api/v1/client/tasks`
+
+#### parameters:
+
+`title`  
+`description`    
+`deadline_time`    
+`sprint_id`    
+`type`    
+`assign_to`       
+`parent_id`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`create-task`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```
+
+### <a id="client-tasks.update"> update </a>
+
+### description:
+
+`loggedin user can update task`
+
+#### method: PATCH
+
+#### `/api/v1/client/tasks/{id}`
+
+#### parameters:
+
+`title`  
+`description`    
+`deadline_time`    
+`sprint_id`    
+`type`    
+`assign_to`       
+`parent_id`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`update-task`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```
+
+### <a id="client-tasks.delete"> delete </a>
+
+### description:
+
+`loggedin user can delete task`
+
+#### method: DELETE
+
+#### `/api/v1/client/tasks/{id}`
+
+#### parameters:
+
+`{id}`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`remove-task`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```

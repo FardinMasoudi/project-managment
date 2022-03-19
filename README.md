@@ -46,3 +46,4 @@ A few of the techniques you can do see in project-management
 - Using query scopes in Sprint model
 - Using filters on sprint and task controller (SprintFilter.php,TaskFilter.php)
 - Using Observer pattern for make permission (ProjectRoleObserver.php)
+- Dockerize project with docker-compose 

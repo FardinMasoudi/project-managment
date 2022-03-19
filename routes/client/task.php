@@ -18,7 +18,7 @@ Route::prefix('/tasks')->group(function () {
         ->middleware('hasPermission:update-task')
         ->name('client-tasks-update');
 
-    Route::delete('/{id}', [TaskController::class, 'delete'])
+    Route::delete('/{id}', [TaskController::class, 'destroy'])
         ->middleware('hasPermission:remove-task')
         ->name('client-tasks-delete');
 });

@@ -45,7 +45,7 @@ class TaskController extends ApiController
         return $this->responseOk();
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $this->taskRepository->destory($id);
 
