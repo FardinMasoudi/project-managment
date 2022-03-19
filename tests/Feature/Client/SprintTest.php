@@ -32,16 +32,17 @@ class SprintTest extends TestCase
 
         $this->getJson(route('client-sprints-index'))
             ->assertJson(['code' => 200])
-            ->assertJsonStructure(['data' => [
-                [
-                    'id',
-                    'goal',
-                    'start_time',
-                    'end_time',
-                    'status',
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'id',
+                        'goal',
+                        'start_time',
+                        'end_time',
+                        'status',
+                    ]
                 ]
-            ]]);
-
+            ]);
     }
 
     public function test_a_client_can_filter_sprints_by_goal()
@@ -58,27 +59,32 @@ class SprintTest extends TestCase
         ]);
 
         $this->getJson(route('client-sprints-index') . "?goal=goal1")
-            ->assertJson(['code' => 200,
+            ->assertJson([
+                'code' => 200,
                 'data' => [
                     [
                         'goal' => 'goal1'
                     ]
-                ]])
-            ->assertJsonMissing(['data' => [
-                [
-                    'goal' => 'goal2'
                 ]
-            ]])
-            ->assertJsonStructure(['data' => [
-                [
-                    'id',
-                    'goal',
-                    'start_time',
-                    'end_time',
-                    'status',
+            ])
+            ->assertJsonMissing([
+                'data' => [
+                    [
+                        'goal' => 'goal2'
+                    ]
                 ]
-            ]]);
-
+            ])
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'id',
+                        'goal',
+                        'start_time',
+                        'end_time',
+                        'status',
+                    ]
+                ]
+            ]);
     }
 
     public function test_a_client_can_filter_sprints_by_status()
@@ -97,21 +103,25 @@ class SprintTest extends TestCase
         ]);
 
         $this->getJson(route('client-sprints-index') . "?status=active")
-            ->assertJson(['code' => 200, 'data' => [
-                [
-                    'status' => 'active'
+            ->assertJson([
+                'code' => 200,
+                'data' => [
+                    [
+                        'status' => 'active'
+                    ]
                 ]
-            ]])
-            ->assertJsonStructure(['data' => [
-                [
-                    'id',
-                    'goal',
-                    'start_time',
-                    'end_time',
-                    'status',
+            ])
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'id',
+                        'goal',
+                        'start_time',
+                        'end_time',
+                        'status',
+                    ]
                 ]
-            ]]);
-
+            ]);
     }
 
     public function test_client_can_see_details_of_sprint()
@@ -124,13 +134,15 @@ class SprintTest extends TestCase
 
         $this->getJson(route('client-sprints-show', [$sprint]))
             ->assertJson(['code' => 200])
-            ->assertJsonStructure(['data' => [
-                'id',
-                'goal',
-                'start_time',
-                'end_time',
-                'status'
-            ]]);
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'goal',
+                    'start_time',
+                    'end_time',
+                    'status'
+                ]
+            ]);
     }
 
     public function test_client_can_create_new_sprint()
@@ -139,7 +151,7 @@ class SprintTest extends TestCase
 
         $this->postJson(route('client-sprints-store'), [
             'goal' => 'test',
-        ])->assertJson(['code' => 200]);
+        ])->assertJson(['code' => 200])->dump();
 
         $this->assertDatabaseHas('sprints', [
             'goal' => 'test'

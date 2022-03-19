@@ -10,7 +10,7 @@
 
 #### [- Project-roles](#client-project-roles)
 
-#### [- Sprints](#client-api-tokens)
+#### [- Sprints](#client-sprints)
 
 #### [- Tasks](#client-currencies)
 
@@ -306,7 +306,7 @@
 
 #### [- store](#client-project-roles.store)
 
-#### [- update](#client-project-roles.update)  
+#### [- update](#client-project-roles.update)
 
 #### [- delete](#client-project-roles.delete)
 
@@ -449,3 +449,167 @@
     "data": null
 }
 ```
+
+## <a id="client-sprints"> Sprints </a>
+
+#### [- index](#client-sprints.index)
+
+#### [- show](#client-sprints.show)
+
+#### [- store](#client-sprints.store)
+
+#### [- update](#client-sprints.update)
+
+
+
+### <a id="client-sprints.index"> index </a>
+
+### description:
+
+`return list of sprints`
+
+#### method: GET
+
+#### `/api/v1/client/sprints`
+
+#### parameters:
+
+`empty`
+
+#### filters:
+
+`goal`  
+`status`
+
+#### access:
+
+`view-sprint`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "goal": "Prof.",
+            "start_time": "2022-03-19 08:01:02",
+            "end_time": "2022-03-26 08:01:02",
+            "status": "active"
+        },
+        {
+            "id": 2,
+            "goal": "Mr.",
+            "tart_time": "2022-03-19 08:01:02",
+            "end_time": "2022-03-26 08:01:02",
+            "status": "active"
+        }
+    ]
+}
+```
+
+### <a id="client-sprints.show"> show </a>
+
+### description:
+
+`return details of sprint`
+
+#### method: GET
+
+#### `/api/v1/client/sprints/{id}`
+
+#### parameters:
+
+`empty`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`show-sprint`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": {
+        "id": 1,
+        "goal": "Dr.",
+        "start_time": "2022-03-19 08:07:08",
+        "end_time": "2022-03-26 08:07:08",
+        "status": "active"
+    }
+}
+```
+
+### <a id="client-sprints.store"> store </a>
+
+### description:
+
+`loggedin user can make new sprint`
+
+#### method: POST
+
+#### `/api/v1/client/sprints`
+
+#### parameters:
+
+`goal`  
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`create-sprint`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```
+
+### <a id="client-sprints.update"> update </a>
+
+### description:
+
+`loggedin user can update sprint`
+
+#### method: PATCH
+
+#### `/api/v1/client/sprints/{id}`
+
+#### parameters:
+
+`goal
+`
+#### filters:
+
+`empty`
+
+#### access:
+
+`update-sprint`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```
+
+
