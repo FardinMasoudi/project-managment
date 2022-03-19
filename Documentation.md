@@ -12,13 +12,13 @@
 
 #### [- Sprints](#client-sprints)
 
-#### [- Tasks](#client-currencies)
+#### [- Tasks](#client-tasks)
 
-#### [- User](#panel-currencies)
+#### [- User](#client-user)
 
-#### [- User-role](#panel-currencies)
+#### [- User-role](#client-user-role)
 
-#### [- Invite-member](#panel-currencies)
+#### [- Invite-member](#client-invite-member)
 
 ## <a id="client-auth"> Authentication </a>
 
@@ -820,5 +820,160 @@
     "error": false,
     "code": 200,
     "data": null
+}
+```
+
+## <a id="client-invite-user"> Invite User </a>
+
+#### [- __invoke](#client-invite-user.invoke)
+
+### <a id="client-invite-user.invoke"> invite user </a>
+
+### description:
+
+`owner project can invite member to projects`
+
+#### method: DELETE
+
+#### `/api/v1/client/invite-member`
+
+#### parameters:
+
+`email`  
+`password`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`invite-user`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": {
+        "invited_member": "abc@gmail.com"
+    }
+}
+```
+
+## <a id="client-user"> User </a>
+
+#### [- show](#client-user-show)
+
+#### [- update](#client-user-update)
+
+#### <a id="client-user-show"> show </a>
+
+### description:
+
+`loggedin user can see own profile`
+
+#### method: GET
+
+#### `/api/v1/client/user`
+
+#### parameters:
+
+`empty`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`empty`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": {
+        "id": 1,
+        "name": "Clinton Batz",
+        "email": "lmoen@example.net"
+    }
+}
+```
+
+#### <a id="client-user-show"> update </a>
+
+### description:
+
+`loggedin user can update own profile`
+
+#### method: PATCH
+
+#### `/api/v1/client/user`
+
+#### parameters:
+
+`name`  
+`email`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`empty`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": null
+}
+```
+
+
+## <a id="client-user"> User-Role </a>
+
+#### [- update](#client-user-attach-role)
+
+#### <a id="client-user-role"> update </a>
+
+### description:
+
+`loggedin user can assigned roles to user`
+
+#### method: PATCH
+
+#### `users/{user}/attach-roles`
+
+#### parameters:
+
+`{user}`
+
+#### filters:
+
+`empty`
+
+#### access:
+
+`empty`
+
+#### response:
+
+```json
+{
+    "error": false,
+    "code": 200,
+    "data": {
+        "id": 1,
+        "name": "Clinton Batz",
+        "email": "lmoen@example.net"
+    }
 }
 ```
