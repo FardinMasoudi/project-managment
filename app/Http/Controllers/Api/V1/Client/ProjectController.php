@@ -25,10 +25,10 @@ class ProjectController extends ApiController
         return $this->responseOk(ProjectResource::collection($projects));
     }
 
-    public function show(Project $project)
+    public function show($id)
     {
         $project = $this->projectRepository
-            ->getProjectById($project->id);
+            ->getProjectById($id);
 
         return $this->responseOk(ProjectResource::make($project));
     }

@@ -15,19 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', RegisterController::class)
-    ->name('register');
+Route::prefix('/v1/client')->group(function () {
+    Route::post('register', RegisterController::class)
+        ->name('register');
 
-Route::post('login', LoginController::class)
-    ->name('login');
+    Route::post('login', LoginController::class)
+        ->name('login');
 
-Route::middleware('auth:sanctum')->group(function () {
-    include 'client/project.php';
-    include 'client/project-role.php';
-    include 'client/sprint.php';
-    include 'client/task.php';
-    include 'client/user.php';
-    include 'client/user-role.php';
-    include 'client/permission.php';
-    include 'client/invite-member.php';
+    Route::middleware('auth:sanctum')->group(function () {
+        include 'client/project.php';
+        include 'client/project-role.php';
+        include 'client/sprint.php';
+        include 'client/task.php';
+        include 'client/user.php';
+        include 'client/user-role.php';
+        include 'client/permission.php';
+        include 'client/invite-member.php';
+    });
 });
