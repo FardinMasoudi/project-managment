@@ -20,22 +20,27 @@ class UserTest extends TestCase
 
     public function test_the_user_can_see_own_profile()
     {
-        $user = $this->create(User::class);
-
-        $this->postJson(route('users.show', [$user]))
+        $this->getJson(route('client-users-show'))
             ->assertJson(['code' => 200])
-            ->assertJsonStructure(['data' => [
-                'name',
-                'email'
-            ]]);
+            ->assertJsonStructure([
+                'data' => [
+                    'name',
+                    'email'
+                ]
+            ]);
     }
 
     public function test_the_user_can_update_own_information()
     {
-        $this->postJson(route('users.update'), [
-            'name' => 'title'
+        $this->patchJson(route('client-users-update'), [
+            'name' => 'fardin',
+            'email' => 'abc@gmail.com'
         ])
             ->assertJson(['code' => 200]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'fardin'
+        ]);
     }
 
 }

@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     include 'client/project-role.php';
     include 'client/sprint.php';
     include 'client/task.php';
+    include 'client/user.php';
     include 'client/user-role.php';
     include 'client/permission.php';
     include 'client/invite-member.php';

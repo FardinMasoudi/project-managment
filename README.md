@@ -11,10 +11,11 @@
 
 The project is similar to Terllo or Jira.
 
-In it, each person can create a project, invite his teammates, create sprint and manage the tasks related to his project.
-
+In it, each person can create a project, invite his teammates, create sprint and manage the tasks related to his
+project.
 
 ### <a id="Features"> Features </a>
+
 A few of the things you can do with project-managment
 
 - Register And Login
@@ -41,4 +42,4 @@ A few of the techniques you can do see in project-management
 - Using middleware for check access
 - Written tdd tests
 - Using relations for example belongsToMany , $belongsTo
-- 
+- Using dependency injection

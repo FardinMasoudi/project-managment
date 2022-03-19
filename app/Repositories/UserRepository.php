@@ -39,11 +39,12 @@ class UserRepository implements UserRepositoryInterface
         ]);
     }
 
-    public function updateUser($user, $request)
+    public function updateUser($id, $request)
     {
-        return $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        return $this->users->where('id', $id)->first()
+            ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
     }
 }
