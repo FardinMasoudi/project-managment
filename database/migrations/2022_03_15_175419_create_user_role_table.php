@@ -14,7 +14,6 @@ class CreateUserRoleTable extends Migration
     public function up()
     {
         Schema::create('user_role', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('member_id')->constrained('users')->cascadeOnDelete();
               $table->foreignId('role_id')->constrained('project_roles')->cascadeOnDelete();
             $table->timestamps();
