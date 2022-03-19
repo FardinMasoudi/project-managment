@@ -39,7 +39,10 @@ A few of the techniques you can do see in project-management
 - Using repository model
 - Using service container
 - Using artisan command for check dead_line time of tasks and schedule
-- Using middleware for check access
-- Written tdd tests
+- Using middleware for check access(HasPermission)
+- Written tdd tests and using model factory
 - Using relations for example belongsToMany , $belongsTo
 - Using dependency injection
+- Using query scopes in Sprint model
+- Using filters on sprint and task controller (SprintFilter.php,TaskFilter.php)
+- Using Observer pattern for make permission (ProjectRoleObserver.php)
