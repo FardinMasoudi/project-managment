@@ -48,8 +48,8 @@ abstract class TestCase extends BaseTestCase
     {
         $this->artisan('db:seed');
 
-        $project1 = $this->create(Project::class, []);
-        $project2 = $this->create(Project::class, []);
+        $project1 = $this->create(Project::class, ['creator_id' => auth()->user()->id]);
+        $project2 = $this->create(Project::class, ['creator_id' => auth()->user()->id]);
 
         DB::table('project_member')
             ->insert([
@@ -57,7 +57,8 @@ abstract class TestCase extends BaseTestCase
                     'project_id' => $project1->id,
                     'member_id' => auth()->user()->id,
                     'is_active' => true
-                ], [
+                ],
+                [
                     'project_id' => $project2->id,
                     'member_id' => auth()->user()->id,
                     'is_active' => false

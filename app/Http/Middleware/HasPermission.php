@@ -17,6 +17,10 @@ class HasPermission
      */
     public function handle(Request $request, Closure $next, $permission)
     {
+        if (auth()->user()->id == auth()->user()->currentProject()->creator_id) {
+            return $next($request);
+        }
+
         if (auth()->user()->hasPermission($permission)) {
             return $next($request);
         }
