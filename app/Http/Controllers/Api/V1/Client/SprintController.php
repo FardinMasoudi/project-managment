@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Filters\SprintFilter;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SprintRequest;
 use App\Http\Resources\SprintResource;
 use App\Interfaces\SprintRepositoryInterface;
-use App\Models\Sprint;
 use App\Traits\Filter;
 
 

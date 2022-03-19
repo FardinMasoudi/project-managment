@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Filters\TaskFilter;
 use App\Http\Controllers\ApiController;

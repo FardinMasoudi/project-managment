@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
+
+use function auth;
 
 
 class UserController extends ApiController

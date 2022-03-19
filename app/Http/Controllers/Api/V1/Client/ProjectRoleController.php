@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\ProjectRoleRequest;
 use App\Http\Resources\ProjectRoleResource;
 use App\Interfaces\ProjectRoleRepositoryInterface;
-use App\Models\Project;
 use App\Models\ProjectRole;
 
 

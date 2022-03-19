@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Client\ProjectRoleController;
+use App\Http\Controllers\Api\V1\Client\ProjectRoleController;
 use Illuminate\Support\Facades\Route;
 
 

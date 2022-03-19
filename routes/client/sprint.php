@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Client\SprintController;
+use App\Http\Controllers\Api\V1\Client\SprintController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/sprints')->group(function () {

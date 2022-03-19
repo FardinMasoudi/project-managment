@@ -1,16 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Client\InviteUserController;
-use App\Http\Controllers\Client\PermissionController;
-use App\Http\Controllers\Client\ProjectController;
-use App\Http\Controllers\Client\ProjectRoleController;
-use App\Http\Controllers\Client\SprintController;
-use App\Http\Controllers\Client\TaskController;
-use App\Http\Controllers\Client\UserRoleController;
-use App\Models\Sprint;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\Auth\LoginController;
+use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*

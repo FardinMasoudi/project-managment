@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\UserRoleRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class UserRoleController extends ApiController
 {
