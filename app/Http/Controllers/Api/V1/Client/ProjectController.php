@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Interfaces\ProjectRepositoryInterface;
@@ -11,7 +10,7 @@ use App\Models\Project;
 
 class ProjectController extends ApiController
 {
-    private ProjectRepositoryInterface $projectRepository;
+    private  $projectRepository;
 
     public function __construct(ProjectRepositoryInterface $repository)
     {
@@ -26,10 +25,10 @@ class ProjectController extends ApiController
         return $this->responseOk(ProjectResource::collection($projects));
     }
 
-    public function show(Project $project)
+    public function show($id)
     {
         $project = $this->projectRepository
-            ->getProjectById($project->id);
+            ->getProjectById($id);
 
         return $this->responseOk(ProjectResource::make($project));
     }
@@ -42,10 +41,10 @@ class ProjectController extends ApiController
         return $this->responseOk();
     }
 
-    public function update(Project $project, ProjectRequest $request)
+    public function update($id, ProjectRequest $request)
     {
         $this->projectRepository
-            ->updateProject($project->id, $request);
+            ->updateProject($id, $request);
 
         return $this->responseOk();
     }

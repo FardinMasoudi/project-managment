@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Couchbase\Role;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,18 +48,26 @@ class User extends Authenticatable
     }
 
 
-    public function projects()
+    public function projects(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Project::class, 'project_member', 'member_id');
     }
 
-    public function roles()
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(ProjectRole::class, 'user_project_role', 'role_id');
+        return $this->belongsToMany(ProjectRole::class, 'user_role', 'member_id', 'role_id');
     }
 
     public function currentProject()
     {
         return $this->projects()->where('is_active', true)->first();
+    }
+
+    public function hasPermission(string $permission)
+    {
+        $roles = $this->roles()->where('project_id', auth()->user()->currentProject()->id)
+            ->get();
+
+        return $roles->map->permissions->flatten()->pluck('title')->contains($permission);
     }
 }

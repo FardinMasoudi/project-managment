@@ -1,0 +1,66 @@
+[
+    {
+        "title": "create-role",
+        "label": "create-role"
+    },
+    {
+        "title": "update-project",
+        "label": "update-project"
+    },
+    {
+        "title": "view-role",
+        "label": "view-role"
+    },
+    {
+        "title": "create-task",
+        "label": "create-task"
+    },
+    {
+        "title": "update-task",
+        "label": "update-task"
+    },
+    {
+        "title": "remove-task",
+        "label": "remove-task"
+    },
+    {
+        "title": "invite-user",
+        "label": "invite-user"
+    },
+    {
+        "title": "view-sprint",
+        "label": "view-sprint"
+    },
+    {
+        "title": "show-sprint",
+        "label": "show-sprint"
+    },
+    {
+        "title": "create-sprint",
+        "label": "create-sprint"
+    },
+    {
+        "title": "update-sprint",
+        "label": "update-sprint"
+    },
+    {
+        "title": "view-role",
+        "label": "view-role"
+    },
+    {
+        "title": "create-role",
+        "label": "create-role"
+    },
+    {
+        "title": "update-role",
+        "label": "update-role"
+    },
+    {
+        "title": "remove-role",
+        "label": "remove-role"
+    },
+    {
+        "title": "attach-role",
+        "label": "attach-role"
+    }
+]

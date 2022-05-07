@@ -8,21 +8,21 @@ use App\Models\Project;
 
 class PermissionRepository implements PermissionRepositoryInterface
 {
-    protected $permission;
+    protected $permissions;
 
     public function __construct(Permission $permission)
     {
-        $this->permission = $permission;
+        $this->permissions = $permission;
     }
 
     public function getAllPermission()
     {
-        return $this->permission->all();
+        return $this->permissions->all();
     }
 
     public function createPermission($data)
     {
-        return $this->permission->create([
+        return $this->permissions->create([
             'title' => $data['title'],
             'label' => $data['label'],
         ]);

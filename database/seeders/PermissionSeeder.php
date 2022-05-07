@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Interfaces\PermissionRepositoryInterface;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class PermissionSeeder extends Seeder
 {
@@ -22,32 +23,8 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = [
-            [
-                'title' => 'create-role',
-                'label' => 'ایجاد نقش'
-            ],
-            [
-                'title' => 'view-role',
-                'label' => 'مشاهده نقش'
-            ],
-            [
-                'title' => 'create-task',
-                'label' => 'ایجاد تسک',
-            ],
-            [
-                'title' => 'remove-task',
-                'label' => 'حذف تسک',
-            ],
-            [
-                'title' => 'invite-user',
-                'label' => 'دعوت کاربر',
-            ],
-            [
-                'title' => 'give-access',
-                'label' => 'دسترسی دادن',
-            ]
-        ];
+        $permissions = json_decode(File::get(base_path('database/data') . '/' . 'permissions.json'), true);
+
         foreach ($permissions as $permission) {
             $this->permission->createPermission($permission);
         }

@@ -8,33 +8,33 @@ use Carbon\Carbon;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
-    protected $project;
+    protected $projects;
 
     public function __construct(Project $project)
     {
-        $this->project = $project;
+        $this->projects = $project;
     }
 
     public function getAllProject()
     {
-        return $this->project->all();
+        return $this->projects->all();
     }
 
     public function getOwnProjects()
     {
-        return $this->project->with('creator')
+        return $this->projects->with('creator')
             ->where('creator_id', auth()->user()->id)
             ->get();
     }
 
     public function getProjectById($id)
     {
-        return $this->project->query()->findOrFail($id);
+        return $this->projects->query()->findOrFail($id);
     }
 
     public function createProject($request)
     {
-        return $this->project->create([
+        return $this->projects->create([
             'creator_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description,
@@ -44,7 +44,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function updateProject($projectId, $request)
     {
-        return $this->project->where('id', $projectId)->first()
+        return $this->projects->where('id', $projectId)->first()
             ->update([
                 'title' => $request->title,
                 'description' => $request->description,

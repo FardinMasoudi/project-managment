@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->foreignId('assign_to')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('type', ['task', 'bug', 'story']);
+            $table->enum('type', ['task', 'bug', 'story','sub_task']);
             $table->foreignId('status_id')->constrained('statuses');
             $table->timestamp('deadline_time')->nullable();
             $table->foreignId('parent_id')->nullable()->constrained('tasks');

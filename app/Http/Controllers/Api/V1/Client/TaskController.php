@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
+use App\Filters\TaskFilter;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
@@ -16,9 +17,9 @@ class TaskController extends ApiController
         $this->taskRepository = $reository;
     }
 
-    public function index()
+    public function index(TaskFilter $filter)
     {
-        $tasks = $this->taskRepository->getAll();
+        $tasks = $this->taskRepository->getAll($filter);
 
         return $this->responseOk(TaskResource::collection($tasks));
     }
@@ -44,7 +45,7 @@ class TaskController extends ApiController
         return $this->responseOk();
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $this->taskRepository->destory($id);
 

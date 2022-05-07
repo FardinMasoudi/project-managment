@@ -11,7 +11,7 @@ class Sprint extends Model
     use HasFactory;
     use FilterTrait;
 
-    protected $guarded = [''];
+    protected $guarded = ['id'];
 
 
     public function scopeCurrentProject($query)

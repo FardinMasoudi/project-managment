@@ -1,11 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Client;
 
 use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use function auth;
+use function route;
 
 class ProjectTest extends TestCase
 {
@@ -17,6 +19,7 @@ class ProjectTest extends TestCase
         parent::setUp();
 
         $this->signIn();
+        $this->prepareData();
     }
 
     public function test_title_filed_is_required()
@@ -97,6 +100,7 @@ class ProjectTest extends TestCase
 
     public function test_the_loggedin_user_can_update_own_projects()
     {
+        $this->GivenAccessToUser('update-project');
         $project = $this->create(Project::class, [
             'title' => 'test',
             'creator_id' => auth()->user()->id

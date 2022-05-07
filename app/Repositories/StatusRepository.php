@@ -7,21 +7,21 @@ use App\Models\Status;
 
 class StatusRepository implements StatusRepositoryInterface
 {
-    protected $status;
+    protected $statuses;
 
     public function __construct(Status $status)
     {
-        $this->status = $status;
+        $this->statuses = $status;
     }
 
     public function getAll()
     {
-        return $this->status->all();
+        return $this->statuses->all();
     }
 
     public function create($data)
     {
-        return $this->status->create([
+        return $this->statuses->create([
             'title' => $data['title'],
             'label' => $data['label']
         ]);

@@ -10,4 +10,10 @@ class Permission extends Model
     use HasFactory;
 
     protected $guarded = [''];
+
+
+    public static function getPermissionIdByTitle($title)
+    {
+        return self::where('title', $title)->firstOrFail()->id;
+    }
 }

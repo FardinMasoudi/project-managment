@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\Invite;
-use App\Mail\WellcomeInvitationMail;
+use App\Mail\WelcomeInvitationMail;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailToUser
@@ -27,7 +27,7 @@ class SendEmailToUser
     public function handle(Invite $event)
     {
         Mail::to($event->user->email)->send(
-            new WellcomeInvitationMail()
+            new WelcomeInvitationMail()
         );
     }
 }

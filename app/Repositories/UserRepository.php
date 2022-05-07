@@ -8,41 +8,43 @@ use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
+    protected $users;
+
+    public function __construct(User $user)
+    {
+        $this->users = $user;
+    }
 
     public function getAllUsers()
     {
-        return User::all();
+        return $this->users->all();
     }
 
     public function getUserById($id)
     {
-        return User::query()->findOrFail($id);
+        return $this->users->findOrFail($id);
     }
 
     public function getUserByEmail($email)
     {
-        return User::query()->whereEmail($email)->first();
+        return $this->users->whereEmail($email)->first();
     }
 
-    public function createUser(Request $request)
+    public function createUser($request)
     {
-        return User::query()->create([
+        return $this->users->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password
         ]);
     }
 
-    public function updateUser(User $user, Request $request)
+    public function updateUser($id, $request)
     {
-        return $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-    }
-
-    public function deleteUser()
-    {
-
+        return $this->users->where('id', $id)->first()
+            ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
     }
 }

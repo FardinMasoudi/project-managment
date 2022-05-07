@@ -37,7 +37,7 @@ class ProjectRoleObserver
      */
     public function deleted(ProjectRole $projectRole)
     {
-        //
+        $projectRole->permissions()->delete();
     }
 
     /**

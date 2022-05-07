@@ -8,27 +8,27 @@ use App\Models\Task;
 
 class TaskRepository implements TaskReositoryInterface
 {
-    protected $task;
+    protected $tasks;
 
     public function __construct(Task $task)
     {
-        $this->task = $task;
+        $this->tasks = $task;
     }
 
-    public function getAll()
+    public function getAll($filters)
     {
-        return $this->task->with('status', 'reporter', 'assignTo')
+        return $this->tasks->with('status', 'reporter', 'assignTo')
             ->get();
     }
 
     public function getById($id)
     {
-        return $this->task->where('id', $id)->first();
+        return $this->tasks->where('id', $id)->first();
     }
 
     public function create($request)
     {
-        return $this->task->create([
+        return $this->tasks->create([
             'project_id' => auth()->user()->currentProject()->id,
             'sprint_id' => $request->sprint_id,
             'reporter_id' => auth()->user()->id,
@@ -44,7 +44,7 @@ class TaskRepository implements TaskReositoryInterface
 
     public function update($id, $request)
     {
-        return $this->task->where('id', $id)->first()
+        return $this->tasks->where('id', $id)->first()
             ->update([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -58,6 +58,6 @@ class TaskRepository implements TaskReositoryInterface
 
     public function destory($id)
     {
-        return $this->task->find($id)->delete();
+        return $this->tasks->find($id)->delete();
     }
 }

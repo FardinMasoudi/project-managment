@@ -3,6 +3,7 @@
 namespace Tests\Feature\Client;
 
 use App\Models\Sprint;
+use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
@@ -44,6 +45,52 @@ class TaskTest extends TestCase
             ]]);
     }
 
+    public function test_client_filter_tasks_by_status()
+    {
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('todo')
+        ], 2);
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('doing')
+        ]);
+
+        $this->getJson(route('client-tasks-index') . "?status=todo")
+            ->assertJson(['code' => 200, 'data' => [
+                [
+                    'status' => 'todo'
+                ]]])
+            ->assertJsonMissing(['data' => [
+                [
+                    'status' => 'doing'
+                ]
+            ]]);
+    }
+
+    public function test_client_filter_only_issues()
+    {
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('todo'),
+            'assign_to' => auth()->user()->id
+        ], 2);
+
+        $this->create(Task::class, [
+            'status_id' => Status::getStatusIdByTitle('doing'),
+            'assign_to' => $this->create(User::class)->id
+        ]);
+
+        $this->getJson(route('client-tasks-index') . "?status=todo&onlyMyIssues")
+            ->assertJson(['code' => 200, 'data' => [
+                [
+                    'status' => 'todo',
+                    'assign_to' => auth()->user()->name
+                ]]])
+            ->assertJsonMissing(['data' => [
+                [
+                    'status' => 'doing'
+                ]
+            ]]);
+    }
+
     public function test_the_client_can_see_details_of_task()
     {
         $task = $this->create(Task::class, [
@@ -51,7 +98,7 @@ class TaskTest extends TestCase
         ]);
 
         $this->getJson(route('client-tasks-show', [$task]))
-            ->assertJson(['code' => 200])
+            ->assertJson(['code' => 200])->dump()
             ->assertJsonStructure(['data' => [
                 'id',
                 'reporter',
@@ -62,8 +109,10 @@ class TaskTest extends TestCase
             ]]);
     }
 
-    public function test_client_can_make_new_test()
+    public function test_client_can_make_new_task()
     {
+        $this->GivenAccessToUser('create-task');
+
         $user = $this->create(User::class);
         $sprint = $this->create(Sprint::class);
 
@@ -84,6 +133,8 @@ class TaskTest extends TestCase
 
     public function test_the_client_can_update_task()
     {
+        $this->GivenAccessToUser('update-task');
+
         $member1 = $this->create(User::class);
         $member2 = $this->create(User::class);
         $task = $this->create(Task::class, [
@@ -108,6 +159,7 @@ class TaskTest extends TestCase
 
     public function test_the_client_can_remove_task()
     {
+        $this->GivenAccessToUser('remove-task');
         $task = $this->create(Task::class);
 
         $this->deleteJson(route('client-tasks-delete', [$task]))->assertJson(['code' => 200]);

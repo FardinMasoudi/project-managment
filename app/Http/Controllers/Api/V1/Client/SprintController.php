@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Filters\SprintFilter;
 use App\Http\Controllers\ApiController;
@@ -26,9 +26,9 @@ class SprintController extends ApiController
         return $this->responseOk(SprintResource::collection($sprints));
     }
 
-    public function show($sprintId)
+    public function show($id)
     {
-        $sprint = $this->sprintRepository->getById($sprintId);
+        $sprint = $this->sprintRepository->getById($id);
 
         return $this->responseOk(SprintResource::make($sprint));
     }
